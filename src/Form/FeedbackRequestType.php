@@ -20,7 +20,11 @@ class FeedbackRequestType extends AbstractType
 					'placeholder' => 'Введите имя',
 				],
 			])
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'Введите email',
+                ],
+            ])
             ->add('topic', ChoiceType::class, [
             	'choices' => array_flip(FeedbackRequest::$topics),
 				'placeholder' => 'Выберите тему',
@@ -28,6 +32,9 @@ class FeedbackRequestType extends AbstractType
 			])
             ->add('message', null, [
 				'label' => 'Сообщение',
+                'attr' => [
+                    'placeholder' => 'Введите текст',
+                ],
 			])
         ;
     }

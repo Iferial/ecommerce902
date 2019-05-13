@@ -10,7 +10,7 @@ use Twig\TwigFilter;
 class AppExtension extends AbstractExtension
 {
 
-    public function getFiltres()
+    public function getFilters()
     {
         return [
             new TwigFilter('money', [$this, 'formatMoney']),
@@ -21,4 +21,5 @@ class AppExtension extends AbstractExtension
     {
         return twig_localized_currency_filter($value / 100, 'UAH');
     }
+
 }
