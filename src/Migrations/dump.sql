@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: ecom902
 -- ------------------------------------------------------
--- Server version	5.7.26-0ubuntu0.19.04.1
+-- Server version	5.7.26-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Бытовая техника'),(2,'Продукты');
+INSERT INTO `category` VALUES (1,'Техника'),(2,'Продукты');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `migration_versions` (
 
 LOCK TABLES `migration_versions` WRITE;
 /*!40000 ALTER TABLE `migration_versions` DISABLE KEYS */;
-INSERT INTO `migration_versions` VALUES ('20190423172309','2019-04-23 17:27:11'),('20190423174356','2019-04-23 17:45:29'),('20190430165922','2019-04-30 16:59:42'),('20190430171309','2019-04-30 17:13:15'),('20190430171909','2019-04-30 17:19:14'),('20190503163032','2019-05-03 16:30:38'),('20190507163617','2019-05-07 16:36:25'),('20190507174802','2019-05-07 17:48:10');
+INSERT INTO `migration_versions` VALUES ('20190423172309','2019-04-23 17:27:11'),('20190423174356','2019-04-23 17:45:29'),('20190430165922','2019-04-30 16:59:42'),('20190430171309','2019-04-30 17:13:15'),('20190430171909','2019-04-30 17:19:14'),('20190503163032','2019-05-03 16:30:38'),('20190507163617','2019-05-07 16:36:25'),('20190507174802','2019-05-07 17:48:10'),('20190513170134','2019-05-13 17:01:54'),('20190513175354','2019-05-13 17:54:13');
 /*!40000 ALTER TABLE `migration_versions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,6 +116,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,NULL,'2019-05-17 20:23:10',1,0,12436400),(2,NULL,'2019-05-21 19:28:34',1,0,0);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +139,7 @@ CREATE TABLE `order_item` (
   KEY `IDX_52EA1F098D9F6D38` (`order_id`),
   CONSTRAINT `FK_52EA1F094584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `FK_52EA1F098D9F6D38` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +148,7 @@ CREATE TABLE `order_item` (
 
 LOCK TABLES `order_item` WRITE;
 /*!40000 ALTER TABLE `order_item` DISABLE KEYS */;
+INSERT INTO `order_item` VALUES (1,3,1,10000000,10000000,1),(2,2,1,33800,33800,1),(3,1,1,2600,2600,1),(4,4,1,2400000,2400000,1);
 /*!40000 ALTER TABLE `order_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,6 +166,9 @@ CREATE TABLE `product` (
   `price` int(11) NOT NULL,
   `count` int(11) DEFAULT NULL,
   `is_top` tinyint(1) NOT NULL DEFAULT '0',
+  `image_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `image_original_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -174,7 +179,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Вода Моршинська 0.5','dfsh fdg sdfg sdfg sdfg sdg fdsg',1800,3,0),(2,'Мышь Vinga','asdf asdf asdf asrdgare sdfg sfdg',20000,NULL,1),(3,'Ноутбук ASUS',NULL,1600000,NULL,0),(4,'Смартфон',NULL,700000,NULL,0);
+INSERT INTO `product` VALUES (1,'Вода Моршинська 0.5','dfsh fdg sdfg sdfg sdfg sdg fdsg',2600,3,0,'5cd9afecce240976398750.jpg','2019-05-21 20:56:49','morsh.jpg'),(2,'Мышь Vinga','asdf asdf asdf asrdgare sdfg sfdg',33800,NULL,1,'74553462_images_11264472762.jpg','2019-05-21 20:56:48',NULL),(3,'Ноутбук ASUS','dasdsada',10000000,NULL,0,'5cdee9f9eb1b8418339438.jpg','2019-05-21 20:56:47','5cdbe97d7d944423250903.jpg'),(4,'iPhone XR','asdsadsa',2400000,NULL,0,'5cdeea7b2550a673936207.jpg','2019-05-21 20:56:51','5cdbe9ab98931566891708.jpg');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +207,7 @@ CREATE TABLE `product_category` (
 
 LOCK TABLES `product_category` WRITE;
 /*!40000 ALTER TABLE `product_category` DISABLE KEYS */;
-INSERT INTO `product_category` VALUES (1,1),(1,2),(2,1);
+INSERT INTO `product_category` VALUES (1,1),(1,2),(2,1),(3,1),(4,1);
 /*!40000 ALTER TABLE `product_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +244,7 @@ CREATE TABLE `site_user` (
 
 LOCK TABLES `site_user` WRITE;
 /*!40000 ALTER TABLE `site_user` DISABLE KEYS */;
-INSERT INTO `site_user` VALUES (1,'admin','admin','admin@supershop.com','admin@supershop.com',1,NULL,'$2y$13$RQgxIVppeYMnGoN4zKrRHedar3EBiDoiCVccA9Kc8R6npySa/kNFi','2019-04-30 20:50:51',NULL,NULL,'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
+INSERT INTO `site_user` VALUES (1,'admin','admin','admin@supershop.com','admin@supershop.com',1,NULL,'$2y$13$RQgxIVppeYMnGoN4zKrRHedar3EBiDoiCVccA9Kc8R6npySa/kNFi','2019-05-17 19:41:58',NULL,NULL,'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');
 /*!40000 ALTER TABLE `site_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -252,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-07 21:00:23
+-- Dump completed on 2019-06-04 19:46:33
